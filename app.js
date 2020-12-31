@@ -5,6 +5,7 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var logger = require("morgan");
 var session = require("express-session");
+var http = require("http");
 
 //import styles from "./styles/style";
 
@@ -72,10 +73,22 @@ app.use(function (err, req, res, next) {
   res.render("error");
 });
 
-var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080,
-  ip = process.env.IP || process.env.OPENSHIFT_NODEJS_IP || "0.0.0.0";
-
+// Reading env variables (config example from https://github.com/sclorg/nodejs-ex/blob/master/server.js)
+var port = process.env.PORT || process.env.OPENSHIFT_NODEJS_PORT || 8080;
 app.set("port", port);
 
-// Export app to use with www.js
-module.exports = app;
+/**
+ * Create HTTP server.
+ */
+
+var server = http.createServer(app);
+
+/**
+ * Create HTTP server.
+ */
+
+/**
+ * Listen on provided port, on all network interfaces.
+ */
+
+server.listen(port);
